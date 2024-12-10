@@ -1,0 +1,30 @@
+name: CI # Название рабочего процесса CI
+
+on:
+  push:
+    branches:
+      - main # Запуск при пуше в ветку main
+  pull_request:
+    branches:
+      - main # Запуск при создании pull request в ветку main
+  workflow_dispatch: # Позволяет запускать вручную
+
+jobs:
+  test: # Определение задачи с именем "test"
+    runs-on: ubuntu-latest # Задача будет выполняться на последней версии Ubuntu
+
+    steps: # Шаги, которые будут выполнены в рамках задачи
+      - name: Checkout code # Шаг для получения кода из репозитория
+        uses: actions/checkout@v2 # Использование действия для извлечения кода
+
+      - name: Set up Python # Шаг для настройки окружения Python
+        uses: actions/setup-python@v2 # Использование действия для установки Python
+        with:
+          python-version: '3.x' # Указание версии Python
+
+      - name: Installing dependencies # Шаг для установки зависимостей проекта
+        run: |
+          pip install bandit  
+
+      - name: Check security # Шаг для проверки безопасности кода
+        run: bandit app/rgr.py app/migrator.py # Запуск Bandit для анализа указанных файлов на наличие уязвимостей
