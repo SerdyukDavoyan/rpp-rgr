@@ -10,7 +10,7 @@ class Subscriptions(db.Model):  # Определяем модель подпис
     start_date = db.Column(db.Date, nullable=False)  # Определяем поле start_date как дату, не допускающую значение NULL
 
 class MigrationLog(db.Model):  # Определяем модель журнала миграций, наследующую от db.Model
-    __tablename__ = 'migration_log'  # Указываем имя таблицы в базе данных
+    __tablename__ = 'migration_log'  # Указываем имя таблицы в бд
 
     id = db.Column(db.Integer, primary_key=True)  # Определяем поле id как первичный ключ (целое число)
     migration_id = db.Column(db.Integer, nullable=False)  # Определяем поле migration_id как целое число, не допускающее значение NULL
